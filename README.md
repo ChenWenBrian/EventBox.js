@@ -2,13 +2,11 @@ EventBox.js
 ============
 
 EventBox.js is a events based object which provides register/trigger events for self or client object. 
-There is a [FileSaver.js demo][1] that demonstrates saving
-various media types.
 
 EventBox.js is the solution to register varies of client objects with event handler and 
 then trigger these event handlers in a single place or trigger event on a specified client, 
-or simply bind global event handler and trigger it.
-------------------
+or simply bind global event handler and trigger it. You may implement this class to have your own
+class.
 
 ### Basic Code Sample:
 ------------------
@@ -16,13 +14,13 @@ or simply bind global event handler and trigger it.
 Create object:
 
 ```js
-var obj = new EventBox();
+var box = new EventBox();
 ```
 
 Bind a global event handler on self:
 
 ```js
-obj.on('onShow', function(evt){
+box.on('onShow', function(evt){
   alert('This is a global on show event');
 });
 ```
@@ -30,13 +28,13 @@ obj.on('onShow', function(evt){
 Register a client object with 'onShow' handler:
 
 ```js
-obj.register('child1', {
+box.register('child1', {
   onShow: function(evt){
     alert('this is child 1');
   }
 });
 
-obj.register('child', {
+box.register('child', {
   onShow: function(evt){
     alert('this is child 2');
   }
@@ -46,19 +44,19 @@ obj.register('child', {
 Trigger this with 'onShow' event:
 
 ```js
-obj.trigger(obj, 'onShow');
+box.trigger(box, 'onShow');
 ```
 
 Trigger a client object with 'onShow' event:
 
 ```js
-obj.trigger('child1', 'onShow');
+box.trigger('child1', 'onShow');
 ```
 
 Trigger all clients object with 'onShow' event:
 
 ```js
-obj.trigger(null, 'onShow');
+box.trigger(null, 'onShow');
 ```
 
 ### Implementation with EventBox:
@@ -79,44 +77,3 @@ TabSwitcher.prototype = new EventBox();
 TabSwitcher.prototype.constructor = TabSwitcher;
 ```
 
-Bind a global event handler on self:
-
-```js
-obj.on('onShow', function(evt){
-  alert('This is a global on show event');
-});
-```
-
-Register a client object with 'onShow' handler:
-
-```js
-obj.register('child1', {
-  onShow: function(evt){
-    alert('this is child 1');
-  }
-});
-
-obj.register('child', {
-  onShow: function(evt){
-    alert('this is child 2');
-  }
-});
-```
-
-Trigger this with 'onShow' event:
-
-```js
-obj.trigger(obj, 'onShow');
-```
-
-Trigger a client object with 'onShow' event:
-
-```js
-obj.trigger('child1', 'onShow');
-```
-
-Trigger all clients object with 'onShow' event:
-
-```js
-obj.trigger(null, 'onShow');
-```
